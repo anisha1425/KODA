@@ -1,19 +1,28 @@
-# KODA - Ebook Platform
+# KODA - Modern E-Book & Comic Platform 📚✨
 
-KODA is a scalable ebook platform built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript.
+KODA is a scalable, full-featured digital reading platform built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript. It supports both novels (EPUB) and comics (CBZ/CBR), featuring a sleek, responsive UI and powerful content management tools.
 
-## Project Structure
+## 🚀 Key Features
 
-The project is organized into two main directories:
+### 📖 Reader Experience
+-   **Multi-Format Support**: Seamless reading for Novels (EPUB) and Comics (CBZ/CBR).
+-   **Interactive Reader**: customizable fonts, themes (Light/Dark), and responsive layout.
+-   **Progress Tracking**: Automatically saves reading progress and history.
 
--   `server/`: Backend API (Node.js + Express + TypeScript)
--   `client/`: Frontend Application (React + Vite + TypeScript)
+### 🌍 Content & Discovery
+-   **Multi-Language Support**: Content available in English, Hindi, French, Spanish, Chinese, and more.
+-   **Advanced Search**: Filter by Genre, Language, Type (Novel/Comic), and Sort options.
+-   **Recommendations**: Personalized "Recommended for You" and "Trending" sections.
 
-## Features (Planned)
+### ✍️ Author Studio
+-   **Dashboard**: Analytics for views, likes, and reader engagement.
+-   **Content Management**: Upload and manage stories, chapters, and covers.
+-   **Monetization Ready**: Structure for author earnings and detailed stats.
 
--   **Authentication**: Secure user login and registration.
--   **Book Management**: Upload, categorize, and manage ebooks.
--   **Reader Interface**: Interactive ebook reader.
+### 🛡️ Admin & Security
+-   **Admin Panel**: comprehensive analytics, user management, and content moderation.
+-   **Role-Based Access**: Secure roles for Users, Authors, and Admins.
+-   **Content Safety**: NSFW filters and content reporting systems.
 
 ## Getting Started
 
