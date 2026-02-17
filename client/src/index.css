@@ -1,0 +1,362 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+/* KODA Design System - With Dark Mode Support
+   All colors are HSL for theme compatibility */
+
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 36 43% 93%;
+    --foreground: 0 0% 10%;
+
+    --card: 37 42% 89%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 36 43% 93%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 32 95% 44%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 37 42% 89%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 36 20% 88%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 28 80% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 36 25% 82%;
+    --input: 36 25% 82%;
+    --ring: 32 95% 44%;
+
+    --radius: 0.75rem;
+
+    /* Legacy color mappings */
+    --color-primary: #D97706;
+    --color-primary-hover: #B45309;
+    --color-accent: #F59E0B;
+    --color-background-light: #F3F2EC;
+    --color-surface-light: #FFFFFF;
+    --color-text-main-light: #1A1A1A;
+    --color-text-muted-light: #525252;
+
+    /* Fonts */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lora', serif;
+    --font-display: 'Playfair Display', serif;
+    --font-reader: 'Lora', serif;
+
+    /* Shadows */
+    --shadow-book: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-book-hover: 0 25px 30px -5px rgba(0, 0, 0, 0.2), 0 15px 15px -5px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark {
+    --background: 30 15% 7%;
+    --foreground: 36 43% 93%;
+
+    --card: 30 12% 12%;
+    --card-foreground: 36 43% 93%;
+
+    --popover: 30 12% 12%;
+    --popover-foreground: 36 43% 93%;
+
+    --primary: 32 95% 50%;
+    --primary-foreground: 0 0% 7%;
+
+    --secondary: 30 10% 16%;
+    --secondary-foreground: 36 43% 93%;
+
+    --muted: 30 8% 18%;
+    --muted-foreground: 36 15% 60%;
+
+    --accent: 28 80% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 20%;
+    --input: 30 10% 20%;
+    --ring: 32 95% 50%;
+
+    /* Legacy dark mappings */
+    --color-background-light: hsl(30 15% 7%);
+    --color-surface-light: hsl(30 12% 12%);
+    --color-text-main-light: hsl(36 43% 93%);
+    --color-text-muted-light: hsl(36 15% 60%);
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Theme color utilities */
+@layer utilities {
+  .bg-background {
+    background-color: hsl(var(--background));
+  }
+
+  .text-foreground {
+    color: hsl(var(--foreground));
+  }
+
+  .bg-card {
+    background-color: hsl(var(--card));
+  }
+
+  .text-card-foreground {
+    color: hsl(var(--card-foreground));
+  }
+
+  .bg-primary {
+    background-color: hsl(var(--primary));
+  }
+
+  .text-primary {
+    color: hsl(var(--primary));
+  }
+
+  .text-primary-foreground {
+    color: hsl(var(--primary-foreground));
+  }
+
+  .bg-secondary {
+    background-color: hsl(var(--secondary));
+  }
+
+  .text-secondary-foreground {
+    color: hsl(var(--secondary-foreground));
+  }
+
+  .bg-muted {
+    background-color: hsl(var(--muted));
+  }
+
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .bg-accent {
+    background-color: hsl(var(--accent));
+  }
+
+  .text-accent-foreground {
+    color: hsl(var(--accent-foreground));
+  }
+
+  .border-border {
+    border-color: hsl(var(--border));
+  }
+
+  .border-input {
+    border-color: hsl(var(--input));
+  }
+
+  .ring-ring {
+    --tw-ring-color: hsl(var(--ring));
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Reader text styling */
+.reader-text {
+  line-height: 1.8;
+  font-size: 1.125rem;
+}
+
+/* Novel prose styling - Kindle-like reading experience */
+.novel-prose {
+  font-family: 'Lora', 'Georgia', serif;
+  color: #2D3748;
+}
+
+.novel-prose p {
+  margin-bottom: 1.5em;
+  text-indent: 1.5em;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.novel-prose p:first-of-type {
+  text-indent: 0;
+}
+
+/* First letter drop cap for starting paragraphs */
+.novel-prose p:first-of-type::first-letter {
+  float: left;
+  font-size: 4rem;
+  line-height: 0.8;
+  padding-right: 0.5rem;
+  padding-top: 0.2rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: #D97706;
+}
+
+/* Headings in novel content */
+.novel-prose h2,
+.novel-prose h3,
+.novel-prose .chapter-heading,
+.novel-prose .section-heading {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  margin: 2.5em 0 1.5em;
+  font-weight: 500;
+  color: #1A1A1A;
+}
+
+.novel-prose h2,
+.novel-prose .chapter-heading {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.novel-prose h3,
+.novel-prose .section-heading {
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+/* Blockquotes for dialogue or emphasis */
+.novel-prose blockquote {
+  margin: 2em 1.5em;
+  padding: 1em 1.5em;
+  border-left: 3px solid #D97706;
+  background: #FEFCE8;
+  font-style: italic;
+}
+
+/* Scene breaks */
+.novel-prose hr {
+  margin: 3em auto;
+  width: 30%;
+  border: none;
+  border-top: 1px solid #E5E7EB;
+}
+
+/* Small caps for emphasis */
+.novel-prose .small-caps {
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
+/* Verse/poetry styling */
+.novel-prose pre,
+.novel-prose .verse {
+  font-family: inherit;
+  white-space: pre-wrap;
+  font-style: italic;
+  margin: 2em 3em;
+  text-align: left;
+  text-indent: 0;
+}
+
+/* Links in content - subtle styling, not too prominent */
+.novel-prose a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.3);
+  text-underline-offset: 2px;
+}
+
+.novel-prose a:hover {
+  text-decoration-color: #D97706;
+}
+
+/* Remove default list styling */
+.novel-prose ul,
+.novel-prose ol {
+  margin: 1.5em 2em;
+  text-indent: 0;
+}
+
+.novel-prose li {
+  margin-bottom: 0.5em;
+  text-indent: 0;
+}
+
+/* Sepia theme adjustments */
+.sepia .novel-prose {
+  color: #3D3833;
+}
+
+.sepia .novel-prose blockquote {
+  background: rgba(217, 119, 6, 0.08);
+}
+
+/* Line clamp utility */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}

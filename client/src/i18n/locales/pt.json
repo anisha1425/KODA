@@ -1,0 +1,78 @@
+{
+    "common": {
+        "app_name": "KODA",
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "search": "Search",
+        "filter": "Filter",
+        "all": "All",
+        "novels": "Novels",
+        "comics": "Comics"
+    },
+    "nav": {
+        "home": "Home",
+        "library": "My Library",
+        "upload": "Upload",
+        "profile": "Profile",
+        "settings": "Settings",
+        "login": "Login",
+        "signup": "Sign Up",
+        "logout": "Logout"
+    },
+    "auth": {
+        "email": "Email",
+        "password": "Password",
+        "confirm_password": "Confirm Password",
+        "display_name": "Display Name",
+        "login_title": "Welcome Back",
+        "signup_title": "Create Account",
+        "login_subtitle": "Sign in to continue reading",
+        "signup_subtitle": "Join KODA to read and share stories",
+        "or_continue_with": "Or continue with",
+        "forgot_password": "Forgot password?",
+        "no_account": "Don't have an account?",
+        "have_account": "Already have an account?"
+    },
+    "home": {
+        "hero_title": "Discover Stories",
+        "hero_subtitle": "Read novels and comics from around the world — completely free",
+        "trending": "Trending Now",
+        "new_arrivals": "New Arrivals",
+        "continue_reading": "Continue Reading",
+        "browse_all": "Browse All"
+    },
+    "reader": {
+        "chapter": "Chapter",
+        "bookmark": "Bookmark",
+        "comments": "Comments",
+        "next": "Next",
+        "previous": "Previous",
+        "settings": "Reader Settings",
+        "font_size": "Font Size",
+        "theme": "Theme"
+    },
+    "book": {
+        "by_author": "by {{author}}",
+        "chapters": "{{count}} chapters",
+        "views": "{{count}} views",
+        "likes": "{{count}} likes",
+        "read_now": "Read Now",
+        "add_to_library": "Add to Library"
+    },
+    "upload": {
+        "title": "Upload New Content",
+        "drag_drop": "Drag and drop your file here",
+        "or_browse": "or browse files",
+        "supported_formats": "Supported: EPUB, CBZ, CBR",
+        "book_title": "Title",
+        "description": "Description",
+        "genre": "Genre",
+        "language": "Language",
+        "content_type": "Content Type",
+        "publish": "Publish"
+    }
+}

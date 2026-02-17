@@ -1,0 +1,78 @@
+{
+    "common": {
+        "app_name": "KODA",
+        "loading": "लोड हो रहा है...",
+        "error": "कुछ गलत हो गया",
+        "save": "सहेजें",
+        "cancel": "रद्द करें",
+        "delete": "हटाएं",
+        "edit": "संपादित करें",
+        "search": "खोजें",
+        "filter": "फ़िल्टर",
+        "all": "सभी",
+        "novels": "उपन्यास",
+        "comics": "कॉमिक्स"
+    },
+    "nav": {
+        "home": "होम",
+        "library": "मेरी लाइब्रेरी",
+        "upload": "अपलोड",
+        "profile": "प्रोफ़ाइल",
+        "settings": "सेटिंग्स",
+        "login": "लॉगिन",
+        "signup": "साइन अप",
+        "logout": "लॉग आउट"
+    },
+    "auth": {
+        "email": "ईमेल",
+        "password": "पासवर्ड",
+        "confirm_password": "पासवर्ड की पुष्टि करें",
+        "display_name": "प्रदर्शन नाम",
+        "login_title": "वापसी पर स्वागत है",
+        "signup_title": "खाता बनाएं",
+        "login_subtitle": "पढ़ना जारी रखने के लिए साइन इन करें",
+        "signup_subtitle": "कहानियां पढ़ने और साझा करने के लिए KODA से जुड़ें",
+        "or_continue_with": "या इसके साथ जारी रखें",
+        "forgot_password": "पासवर्ड भूल गए?",
+        "no_account": "खाता नहीं है?",
+        "have_account": "पहले से खाता है?"
+    },
+    "home": {
+        "hero_title": "कहानियां खोजें",
+        "hero_subtitle": "दुनिया भर से उपन्यास और कॉमिक्स पढ़ें — पूरी तरह से मुफ्त",
+        "trending": "ट्रेंडिंग",
+        "new_arrivals": "नए आगमन",
+        "continue_reading": "पढ़ना जारी रखें",
+        "browse_all": "सभी देखें"
+    },
+    "reader": {
+        "chapter": "अध्याय",
+        "bookmark": "बुकमार्क",
+        "comments": "टिप्पणियां",
+        "next": "अगला",
+        "previous": "पिछला",
+        "settings": "रीडर सेटिंग्स",
+        "font_size": "फ़ॉन्ट साइज़",
+        "theme": "थीम"
+    },
+    "book": {
+        "by_author": "{{author}} द्वारा",
+        "chapters": "{{count}} अध्याय",
+        "views": "{{count}} व्यूज",
+        "likes": "{{count}} लाइक्स",
+        "read_now": "अभी पढ़ें",
+        "add_to_library": "लाइब्रेरी में जोड़ें"
+    },
+    "upload": {
+        "title": "नई सामग्री अपलोड करें",
+        "drag_drop": "अपनी फ़ाइल यहां खींचें और छोड़ें",
+        "or_browse": "या फ़ाइलें ब्राउज़ करें",
+        "supported_formats": "समर्थित: EPUB, CBZ, CBR",
+        "book_title": "शीर्षक",
+        "description": "विवरण",
+        "genre": "शैली",
+        "language": "भाषा",
+        "content_type": "सामग्री प्रकार",
+        "publish": "प्रकाशित करें"
+    }
+}

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BookSaw Author Dashboard</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Prata&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#C67652", // Terracotta color from the 'Life of The Wild' accent
+                        "background-light": "#F3F2EC", // Warm beige from the screenshot background
+                        "background-dark": "#18181b", // Dark charcoal for dark mode
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#27272a",
+                        "text-main-light": "#1f2937",
+                        "text-main-dark": "#e5e7eb",
+                        "text-muted-light": "#6b7280",
+                        "text-muted-dark": "#9ca3af",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        serif: ["Prata", "serif"], // Matching the elegant headers
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                },
+            },
+        };
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4b5563; 
+        }.wavy-underline {
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .wavy-underline::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 4px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 4'%3E%3Cpath stroke='%23C67652' stroke-width='2' fill='none' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+            background-size: 20px 100%;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-sans transition-colors duration-300 antialiased min-h-screen flex">
+<aside class="w-64 fixed inset-y-0 left-0 z-20 hidden md:flex flex-col bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-800 shadow-sm transition-colors duration-300">
+<div class="h-20 flex items-center px-8 border-b border-gray-100 dark:border-gray-800">
+<h1 class="text-2xl font-serif font-bold tracking-tight text-gray-900 dark:text-white">BOOK<span class="text-primary">SAW</span></h1>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1">
+<a class="flex items-center px-4 py-3 text-sm font-medium rounded-md bg-primary/10 text-primary dark:bg-primary/20" href="#">
+<span class="material-icons-outlined mr-3">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined mr-3">menu_book</span>
+                My Stories
+            </a>
+<a class="flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined mr-3">analytics</span>
+                Analytics
+            </a>
+<a class="flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined mr-3">forum</span>
+                Comments
+            </a>
+<a class="flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined mr-3">account_balance_wallet</span>
+                Earnings
+            </a>
+</nav>
+<div class="p-4 border-t border-gray-100 dark:border-gray-800">
+<a class="flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined mr-3">settings</span>
+                Settings
+            </a>
+<a class="flex items-center px-4 py-3 text-sm font-medium rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-icons-outlined mr-3">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<main class="flex-1 md:ml-64 p-6 lg:p-10 transition-all duration-300">
+<div class="flex justify-between items-center mb-10">
+<div class="md:hidden">
+<span class="material-icons-outlined text-2xl cursor-pointer">menu</span>
+</div>
+<div>
+<h2 class="text-3xl font-serif text-gray-900 dark:text-white wavy-underline">Author Dashboard</h2>
+<p class="mt-2 text-sm text-text-muted-light dark:text-text-muted-dark">Welcome back, Arthur Doyle. Here is your daily overview.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+<span class="material-icons-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-gray-300 dark:bg-gray-600 overflow-hidden border-2 border-primary">
+<img alt="Profile" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrRy4_bzvQhrkxBD-ZfAq0QTYZgSFAT3DZXyEPp9G-J5T4kf94ns6kn59sOMqPfMzdm-AkEekSQbE8I4VU43rgV0AVxrcWzMX-K9TCVM1e6WqPKWLKMdSGMgJz1vHWn1SxBYkf0Q-8jrQTfazSuc_eBdcS33XtBZoCJxuSACj07ru3aQmog7xvm6zUni7qRJMBH9FscVtlDPVCxcuWBn4HPvw-jOdN1j6YZOfEhDASUQYVYsXH39ifUB4JHeMxmtP3HZURxmu3_4I"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center justify-center text-center transition hover:shadow-md">
+<div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-full mb-4">
+<span class="material-icons-outlined text-blue-500 text-2xl">menu_book</span>
+</div>
+<h3 class="text-text-muted-light dark:text-text-muted-dark text-sm uppercase tracking-wider font-semibold">Total Reads</h3>
+<p class="text-4xl font-serif mt-2 text-gray-900 dark:text-white">128.5k</p>
+<span class="text-xs text-green-500 mt-2 flex items-center font-medium">
+<span class="material-icons-outlined text-sm mr-1">trending_up</span> +12% this week
+                </span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center justify-center text-center transition hover:shadow-md">
+<div class="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-full mb-4">
+<span class="material-icons-outlined text-purple-500 text-2xl">people</span>
+</div>
+<h3 class="text-text-muted-light dark:text-text-muted-dark text-sm uppercase tracking-wider font-semibold">Followers</h3>
+<p class="text-4xl font-serif mt-2 text-gray-900 dark:text-white">4,320</p>
+<span class="text-xs text-green-500 mt-2 flex items-center font-medium">
+<span class="material-icons-outlined text-sm mr-1">trending_up</span> +5 new today
+                </span>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col items-center justify-center text-center transition hover:shadow-md">
+<div class="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-full mb-4">
+<span class="material-icons-outlined text-orange-500 text-2xl">chat_bubble_outline</span>
+</div>
+<h3 class="text-text-muted-light dark:text-text-muted-dark text-sm uppercase tracking-wider font-semibold">Total Comments</h3>
+<p class="text-4xl font-serif mt-2 text-gray-900 dark:text-white">892</p>
+<span class="text-xs text-text-muted-light dark:text-text-muted-dark mt-2 font-medium">
+                    24 unread comments
+                </span>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<div class="xl:col-span-1">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-gray-100 dark:border-gray-800 overflow-hidden sticky top-6">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
+<h3 class="text-xl font-serif font-semibold text-gray-900 dark:text-white">Upload New Story</h3>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-1">Publish your next masterpiece to the world.</p>
+</div>
+<form class="p-6 space-y-5">
+<div class="w-full">
+<label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Cover Image</label>
+<div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md hover:bg-gray-50 dark:hover:bg-gray-800/50 transition cursor-pointer">
+<div class="space-y-1 text-center">
+<span class="material-icons-outlined text-gray-400 text-3xl">cloud_upload</span>
+<div class="flex text-sm text-gray-600 dark:text-gray-400">
+<label class="relative cursor-pointer bg-transparent rounded-md font-medium text-primary hover:text-primary/80 focus-within:outline-none" for="file-upload">
+<span>Upload a file</span>
+<input class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 uppercase tracking-wide" for="title">Story Title</label>
+<input class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-md py-2.5" id="title" name="title" placeholder="e.g. The Lady Beauty Scarlett" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 uppercase tracking-wide" for="description">Synopsis</label>
+<textarea class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-md" id="description" name="description" placeholder="Brief description of your story..." rows="3"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 uppercase tracking-wide" for="genre">Genre</label>
+<select class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-md py-2.5" id="genre" name="genre">
+<option>Romance</option>
+<option>Fantasy</option>
+<option>Thriller</option>
+<option>Sci-Fi</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1 uppercase tracking-wide" for="language">Language</label>
+<select class="shadow-sm focus:ring-primary focus:border-primary block w-full sm:text-sm border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-md py-2.5" id="language" name="language">
+<option>English</option>
+<option>Spanish</option>
+<option>French</option>
+<option>Japanese</option>
+</select>
+</div>
+</div>
+<div class="pt-2">
+<button class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all" type="button">
+                                Create Draft
+                            </button>
+</div>
+</form>
+</div>
+</div>
+<div class="xl:col-span-2">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-gray-100 dark:border-gray-800 flex flex-col h-full">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
+<div>
+<h3 class="text-xl font-serif font-semibold text-gray-900 dark:text-white">My Published Works</h3>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark mt-1">Manage your chapters and view reader feedback.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+<span class="material-icons-outlined">filter_list</span>
+</button>
+<button class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+<span class="material-icons-outlined">search</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
+<thead class="bg-gray-50 dark:bg-gray-800/50">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Book Details</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Status</th>
+<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Stats</th>
+<th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody class="bg-surface-light dark:bg-surface-dark divide-y divide-gray-200 dark:divide-gray-800">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-16 w-12 bg-gray-200 rounded shadow-sm overflow-hidden">
+<img alt="Book cover" class="h-16 w-12 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLV1vItJILIxnMy2QffSn1YibXl83674ilibGlxgz9k24Tz7K-_52ZWSFQWq1AHChPihdz-ZVQuecYB7ox_yk7bBFV7Oevw-nbbSHeERgUsIV2mzGo-KNenLvxzBsMKwko8BfAOdjoDYPTyajBlK7nNApOpczAwdCVfwQRBqGcYAdgNcKUz1XEyUo4KgCtDCrlvimI4dRdekSoVBIaycze5QPjHBs67yfmevVV1hgBiZP0ftMTuPhalWl6TO_FZYSpJXyPnh3NF1w"/>
+</div>
+<div class="ml-4">
+<div class="text-sm font-serif font-bold text-gray-900 dark:text-white">The Lady Beauty Scarlett</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Romance • English</div>
+<div class="text-xs text-gray-400 mt-1">Last updated 2 days ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                            Published
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+<div class="flex flex-col gap-1">
+<span class="flex items-center text-xs"><span class="material-icons-outlined text-sm mr-1">visibility</span> 45.2k</span>
+<span class="flex items-center text-xs"><span class="material-icons-outlined text-sm mr-1">star</span> 4.8</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex justify-end space-x-2">
+<button class="text-primary hover:text-primary/70 transition" title="Add Chapter">
+<span class="material-icons-outlined text-lg">post_add</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition" title="Edit Metadata">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition" title="View Comments">
+<span class="material-icons-outlined text-lg">comment</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-16 w-12 bg-gray-200 rounded shadow-sm overflow-hidden">
+<img alt="Book cover" class="h-16 w-12 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBljHbtrCvpCIBOMY5p4EVgK-HuJDefHsahtNGfrgJFoXU52MG00MDB_U5i_Z_8QeP_4LaupSwNyLvLJh9-NFu9X9a4qiJv8HWdVfNlOio13agr2eN7uxQqmTaymXE2GgME5_ShVm1UhaNYJjURYjyQcstF5eVjLFpjdotfOFpnXyoB2SAQxI_Ny4_zORri5pNpGigiyqt68xo2XVN2zvkxf22XRLeuiU--s1cHNsbNo8Fj7qPY0ZUm494kWK_R2Z39erZJ0joCU1o"/>
+</div>
+<div class="ml-4">
+<div class="text-sm font-serif font-bold text-gray-900 dark:text-white">Great Travel At Desert</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Travel • English</div>
+<div class="text-xs text-gray-400 mt-1">Last updated 1 week ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                            Published
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+<div class="flex flex-col gap-1">
+<span class="flex items-center text-xs"><span class="material-icons-outlined text-sm mr-1">visibility</span> 12.8k</span>
+<span class="flex items-center text-xs"><span class="material-icons-outlined text-sm mr-1">star</span> 4.5</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex justify-end space-x-2">
+<button class="text-primary hover:text-primary/70 transition">
+<span class="material-icons-outlined text-lg">post_add</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+<span class="material-icons-outlined text-lg">comment</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-16 w-12 bg-gray-200 rounded shadow-sm overflow-hidden bg-gray-100 flex items-center justify-center">
+<span class="material-icons-outlined text-gray-400">image</span>
+</div>
+<div class="ml-4">
+<div class="text-sm font-serif font-bold text-gray-900 dark:text-white">Whispers of the Old World</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Fantasy • Spanish</div>
+<div class="text-xs text-gray-400 mt-1">Created yesterday</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                                            Draft
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+<div class="flex flex-col gap-1">
+<span class="flex items-center text-xs text-gray-300 dark:text-gray-600">No stats yet</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex justify-end space-x-2">
+<button class="text-primary hover:text-primary/70 transition">
+<span class="material-icons-outlined text-lg">publish</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+<span class="material-icons-outlined text-lg">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center">
+<div class="flex-shrink-0 h-16 w-12 bg-gray-200 rounded shadow-sm overflow-hidden">
+<img alt="Book cover" class="h-16 w-12 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpYks7M2bc7to5XUCnAmzac8RVqchgcEctRQBuDVWDLNCiH5EzEmhF4pRzYGPu5x-eFvis5JTb7qksOef_KfpPkN9xNZI1FcBJXjhAT79XPnrlAYwhBt5Dd_6LT6pTK7XTV6yzXX81qHJd6OLnQomD1YvuipZCFWbcHx-04YvBhDvxguvPN6VK8ku6X8vNAHB1ZxRHEAr2BJGmgm3FoO1nXXYN3YhL6chpAB-Dn-0Mm1udrAXPkMkuQ1afSGl45RlEB7kyvSpPfys"/>
+</div>
+<div class="ml-4">
+<div class="text-sm font-serif font-bold text-gray-900 dark:text-white">Once Upon A Time</div>
+<div class="text-xs text-gray-500 dark:text-gray-400">Fiction • French</div>
+<div class="text-xs text-gray-400 mt-1">Last updated 1 month ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                            Published
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+<div class="flex flex-col gap-1">
+<span class="flex items-center text-xs"><span class="material-icons-outlined text-sm mr-1">visibility</span> 85.1k</span>
+<span class="flex items-center text-xs"><span class="material-icons-outlined text-sm mr-1">star</span> 4.9</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<div class="flex justify-end space-x-2">
+<button class="text-primary hover:text-primary/70 transition">
+<span class="material-icons-outlined text-lg">post_add</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+<span class="material-icons-outlined text-lg">edit</span>
+</button>
+<button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition">
+<span class="material-icons-outlined text-lg">comment</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-800 sm:px-6">
+<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-gray-700 dark:text-gray-400">
+                                    Showing <span class="font-medium">1</span> to <span class="font-medium">4</span> of <span class="font-medium">12</span> results
+                                </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+<a class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:border-gray-700 bg-surface-light dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" href="#">
+<span class="material-icons-outlined text-base">chevron_left</span>
+</a>
+<a aria-current="page" class="z-10 bg-primary/10 border-primary text-primary relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#"> 1 </a>
+<a class="bg-surface-light dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#"> 2 </a>
+<a class="bg-surface-light dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium" href="#"> 3 </a>
+<a class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:border-gray-700 bg-surface-light dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700" href="#">
+<span class="material-icons-outlined text-base">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Check system preference on load
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        // Optional: Add a floating toggle if needed for manual testing
+        // For the purpose of this output, I rely on system prefs or manual class addition
+    </script>
+
+</body></html>
