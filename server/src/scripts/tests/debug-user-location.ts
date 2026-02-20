@@ -6,7 +6,7 @@ import { User } from '../../modules/users/user.model';
 dotenv.config();
 
 const EMAIL_TO_CHECK = 'shreya@gmail.com';
-const OLD_URI = 'mongodb+srv://samarthya:sam1234@cluster0.yia8d.mongodb.net/koda?retryWrites=true&w=majority';
+const OLD_URI = process.env.OLD_MONGODB_URI || 'mongodb://localhost:27017/koda_old';
 // The current .env should have the NEW URI
 const NEW_URI = process.env.MONGODB_URI;
 
