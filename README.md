@@ -33,22 +33,23 @@ KODA is a scalable, full-featured digital reading platform built with the MERN s
 
 ### Installation
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd Koda
-    ```
+### Installation
+
+1.  **Setup Project:**
+    *   Extract the `Koda_Shareable.zip` file.
+    *   Open the folder in VS Code or your terminal.
 
 2.  **Server Setup:**
     ```bash
     cd server
     npm install
-    # Create a .env file based on .env.example (or use defaults)
+    # Start the server
     npm run dev
     ```
 
 3.  **Client Setup:**
     ```bash
+    # Open a new terminal
     cd client
     npm install
     npm run dev
@@ -56,5 +57,9 @@ KODA is a scalable, full-featured digital reading platform built with the MERN s
 
 ## Scripts
 
--   `npm run dev`: Starts the development server.
 -   `npm run build`: Builds the project for production.
+
+### ⚙️ Configuration
+
+**✅ Pre-Configured**: This project comes with a `.env` file containing the credentials you provided (MongoDB, Google/GitHub OAuth).
+No additional setup is required. Just run `npm run dev`!
