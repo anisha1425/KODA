@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Configuration
-const SOURCE_URI = 'mongodb+srv://samarthya:sam1234@cluster0.yia8d.mongodb.net/koda?retryWrites=true&w=majority';
+const SOURCE_URI = process.env.OLD_MONGODB_URI || 'mongodb://localhost:27017/koda_old';
 const DEST_URI = process.env.MONGODB_URI;
 
 if (!DEST_URI) {
