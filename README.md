@@ -36,8 +36,8 @@ KODA is a scalable, full-featured digital reading platform built with the MERN s
 ### Installation
 
 1.  **Setup Project:**
-    *   Extract the `Koda_Shareable.zip` file.
-    *   Open the folder in VS Code or your terminal.
+    *   Clone the repository: `git clone https://github.com/anisha1425/KODA.git`
+    *   Open the newly created `KODA` folder in VS Code or your terminal.
 
 2.  **Server Setup:**
     ```bash
