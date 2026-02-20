@@ -61,5 +61,7 @@ KODA is a scalable, full-featured digital reading platform built with the MERN s
 
 ### ⚙️ Configuration
 
-**✅ Pre-Configured**: This project comes with a `.env` file containing the credentials you provided (MongoDB, Google/GitHub OAuth).
-No additional setup is required. Just run `npm run dev`!
+1. **Server Configuration**: Create a `.env` file in the `server` directory and add the necessary environment variables (e.g., `MONGODB_URI`, `JWT_SECRET`, `GOOGLE_CLIENT_ID`, etc.). You can use `.env.example` as a reference if available.
+2. **Client Configuration**: Create a `.env` file in the `client` directory and specify your `VITE_API_URL` (typically `http://localhost:5001/api`).
+
+Once configured, run `npm run dev` in both directories!
