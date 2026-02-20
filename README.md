@@ -6,7 +6,7 @@ KODA is a scalable, full-featured digital reading platform built with the MERN s
 
 ### 📖 Reader Experience
 -   **Multi-Format Support**: Seamless reading for Novels (EPUB) and Comics (CBZ/CBR).
--   **Interactive Reader**: Clean, distraction-free reading UI with adjustable font sizing.
+-   **Interactive Reader**: Clean, distraction-free reading UI optimized for long reading sessions.
 -   **Progress Tracking**: Automatically saves reading progress and history.
 
 ### 🌍 Content & Discovery
