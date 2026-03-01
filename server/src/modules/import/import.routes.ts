@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { importGutenbergBooks } from './gutenberg.service';
 import { importArchiveComics } from './archive.service';
+import { importMangadexManga } from './mangadex.service';
 
 const router = Router();
 
@@ -94,6 +95,48 @@ router.post('/comics', requireAdmin, async (req: Request, res: Response) => {
     // Run import in background
     try {
         const result = await importArchiveComics(limit);
+        importStatus = {
+            ...importStatus,
+            isRunning: false,
+            ...result,
+        };
+    } catch (err) {
+        importStatus.isRunning = false;
+        importStatus.errors++;
+    }
+});
+
+/**
+ * POST /api/import/mangadex
+ * Import manga (Japanese) or manhwa (Korean) from MangaDex
+ * Admin only
+ */
+router.post('/mangadex', requireAdmin, async (req: Request, res: Response) => {
+    if (importStatus.isRunning) {
+        return res.status(409).json({ error: 'Import already in progress', status: importStatus });
+    }
+
+    const { limit = 100, type = 'manga' } = req.body;
+    const validType = type === 'manhwa' ? 'manhwa' : 'manga';
+
+    // Start async import
+    importStatus = {
+        isRunning: true,
+        type: `mangadex_${validType}`,
+        imported: 0,
+        skipped: 0,
+        errors: 0,
+        startedAt: new Date(),
+    };
+
+    res.json({
+        message: `Starting MangaDex ${validType} import (limit: ${limit})`,
+        status: importStatus,
+    });
+
+    // Run import in background
+    try {
+        const result = await importMangadexManga(limit, validType);
         importStatus = {
             ...importStatus,
             isRunning: false,

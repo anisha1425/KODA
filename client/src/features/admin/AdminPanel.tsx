@@ -716,6 +716,7 @@ export default function AdminPanel() {
                                 <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">User Uploads</span>
                                 <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">Project Gutenberg</span>
                                 <span className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-medium">Internet Archive</span>
+                                <span className="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-medium">MangaDex</span>
                             </div>
                         </div>
                     </div>
@@ -845,6 +846,11 @@ export default function AdminPanel() {
     const [importLoading, setImportLoading] = useState(false);
     const [importResult, setImportResult] = useState<{ success: boolean; message: string } | null>(null);
 
+    // MangaDex import state
+    const [mangadexLimit, setMangadexLimit] = useState(50);
+    const [mangadexLoading, setMangadexLoading] = useState(false);
+    const [mangadexResult, setMangadexResult] = useState<{ success: boolean; message: string } | null>(null);
+
     const handleImportGutenberg = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!importGutenbergId) return;
@@ -861,6 +867,23 @@ export default function AdminPanel() {
             setImportResult({ success: false, message: (err as any).response?.data?.message || 'Import failed' });
         } finally {
             setImportLoading(false);
+        }
+    };
+
+    const handleImportMangadex = async (type: 'manga' | 'manhwa') => {
+        setMangadexLoading(true);
+        setMangadexResult(null);
+        const label = type === 'manga' ? 'Manga (Japanese)' : 'Manhwa (Korean)';
+        try {
+            await adminApi.importMangadex(type, mangadexLimit);
+            setMangadexResult({ success: true, message: `${label} import started! Importing up to ${mangadexLimit} titles in the background.` });
+            fetchStats();
+        } catch (err: unknown) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const msg = (err as any).response?.data?.error || 'Import failed';
+            setMangadexResult({ success: false, message: msg });
+        } finally {
+            setMangadexLoading(false);
         }
     };
 
@@ -919,6 +942,65 @@ export default function AdminPanel() {
                             </div>
                         )}
                     </form>
+                </div>
+
+                {/* MangaDex Import — Manga & Manhwa */}
+                <div className="bg-white rounded-xl border border-gray-100 p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center">
+                            <span className="material-icons-outlined">auto_awesome</span>
+                        </div>
+                        <div>
+                            <h2 className="font-display text-lg font-bold">MangaDex</h2>
+                            <p className="text-sm text-text-muted-light">Import manga (Japanese) & manhwa (Korean)</p>
+                        </div>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-text-main-light mb-1">Import Limit</label>
+                            <select
+                                value={mangadexLimit}
+                                onChange={(e) => setMangadexLimit(Number(e.target.value))}
+                                className="w-full px-4 py-2 border border-gray-200 rounded-lg bg-white text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                            >
+                                <option value={20}>20 titles</option>
+                                <option value={50}>50 titles</option>
+                                <option value={100}>100 titles</option>
+                                <option value={200}>200 titles</option>
+                            </select>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => handleImportMangadex('manga')}
+                                disabled={mangadexLoading}
+                                className={`flex-1 px-4 py-2.5 bg-pink-600 text-white rounded-lg font-medium text-sm transition-all ${mangadexLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-pink-700 shadow-md hover:shadow-lg cursor-pointer'}`}
+                            >
+                                {mangadexLoading ? 'Importing...' : '🇯🇵 Import Manga'}
+                            </button>
+                            <button
+                                onClick={() => handleImportMangadex('manhwa')}
+                                disabled={mangadexLoading}
+                                className={`flex-1 px-4 py-2.5 bg-indigo-600 text-white rounded-lg font-medium text-sm transition-all ${mangadexLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700 shadow-md hover:shadow-lg cursor-pointer'}`}
+                            >
+                                {mangadexLoading ? 'Importing...' : '🇰🇷 Import Manhwa'}
+                            </button>
+                        </div>
+
+                        <p className="text-xs text-text-muted-light">
+                            Only SFW content is imported. NSFW content is filtered at API level + keyword blocklist.
+                        </p>
+
+                        {mangadexResult && (
+                            <div className={`p-4 rounded-lg flex items-start gap-3 ${mangadexResult.success ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`}>
+                                <span className="material-icons-outlined text-sm mt-0.5">
+                                    {mangadexResult.success ? 'check_circle' : 'error'}
+                                </span>
+                                <p className="text-sm font-medium">{mangadexResult.message}</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </>

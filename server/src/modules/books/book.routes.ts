@@ -536,4 +536,87 @@ router.put('/:id/progress', authenticate, async (req: AuthRequest, res: Response
     }
 });
 
+// ===== MangaDex Proxy Endpoints =====
+
+// GET /api/books/:id/mangadex-chapters - Fetch chapter list from MangaDex
+router.get('/:id/mangadex-chapters', async (req: Request, res: Response) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        if (!book || !book.mangadexId) {
+            res.status(404).json({ error: 'MangaDex manga not found' });
+            return;
+        }
+
+        const axios = (await import('axios')).default;
+        const lang = book.language === 'ko' ? 'ko' : book.language === 'ja' ? 'en' : 'en';
+
+        // Fetch chapters from MangaDex, sorted by chapter number
+        const response = await axios.get(`https://api.mangadex.org/manga/${book.mangadexId}/feed`, {
+            params: {
+                'translatedLanguage[]': lang,
+                'order[chapter]': 'asc',
+                'limit': 100,
+                'offset': Number(req.query.offset) || 0,
+                'includes[]': ['scanlation_group'],
+            },
+            timeout: 15000,
+        });
+
+        const chapters = response.data.data.map((ch: any) => ({
+            id: ch.id,
+            chapter: ch.attributes.chapter || '0',
+            title: ch.attributes.title || `Chapter ${ch.attributes.chapter || '?'}`,
+            volume: ch.attributes.volume,
+            pages: ch.attributes.pages,
+            publishAt: ch.attributes.publishAt,
+            group: ch.relationships?.find((r: any) => r.type === 'scanlation_group')?.attributes?.name || 'Unknown',
+        }));
+
+        res.json({
+            chapters,
+            total: response.data.total,
+            limit: response.data.limit,
+            offset: response.data.offset,
+        });
+    } catch (error) {
+        console.error('MangaDex chapters fetch error:', error);
+        res.status(500).json({ error: 'Failed to fetch chapters from MangaDex' });
+    }
+});
+
+// GET /api/books/:id/mangadex-pages/:chapterId - Fetch page URLs for a chapter
+router.get('/:id/mangadex-pages/:chapterId', async (req: Request, res: Response) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        if (!book || !book.mangadexId) {
+            res.status(404).json({ error: 'MangaDex manga not found' });
+            return;
+        }
+
+        const axios = (await import('axios')).default;
+
+        // Fetch at-home server URL for this chapter
+        const atHomeRes = await axios.get(`https://api.mangadex.org/at-home/server/${req.params.chapterId}`, {
+            timeout: 15000,
+        });
+
+        const { baseUrl, chapter } = atHomeRes.data;
+
+        // Build full image URLs (use data-saver for faster loading)
+        const pages = chapter.dataSaver.map((filename: string) =>
+            `${baseUrl}/data-saver/${chapter.hash}/${filename}`
+        );
+
+        // Also provide high-quality URLs
+        const pagesHQ = chapter.data.map((filename: string) =>
+            `${baseUrl}/data/${chapter.hash}/${filename}`
+        );
+
+        res.json({ pages, pagesHQ, hash: chapter.hash });
+    } catch (error) {
+        console.error('MangaDex pages fetch error:', error);
+        res.status(500).json({ error: 'Failed to fetch pages from MangaDex' });
+    }
+});
+
 export default router;

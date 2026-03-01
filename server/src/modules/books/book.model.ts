@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export type ContentType = 'novel' | 'comic';
 export type Language = 'en' | 'es' | 'fr' | 'de' | 'ja' | 'ko' | 'zh' | 'hi' | 'pt' | 'ru' | 'ar' | 'other';
 export type Genre = 'fantasy' | 'sci-fi' | 'romance' | 'mystery' | 'thriller' | 'horror' | 'action' | 'adventure' | 'comedy' | 'drama' | 'slice-of-life' | 'other';
-export type BookSource = 'user' | 'gutenberg' | 'internet_archive';
+export type BookSource = 'user' | 'gutenberg' | 'internet_archive' | 'mangadex';
 export type BookFormat = 'epub' | 'pdf' | 'cbz' | 'cbr' | 'txt';
 
 export interface IBook extends Document {
@@ -24,6 +24,7 @@ export interface IBook extends Document {
     source: BookSource;
     gutenbergId?: number;
     archiveId?: string;
+    mangadexId?: string;
     externalUrl?: string;
     format?: BookFormat;
     subjects?: string[];
@@ -96,13 +97,16 @@ const bookSchema = new Schema<IBook>(
         // External source fields
         source: {
             type: String,
-            enum: ['user', 'gutenberg', 'internet_archive'],
+            enum: ['user', 'gutenberg', 'internet_archive', 'mangadex'],
             default: 'user',
         },
         gutenbergId: {
             type: Number,
         },
         archiveId: {
+            type: String,
+        },
+        mangadexId: {
             type: String,
         },
         externalUrl: {
@@ -139,6 +143,7 @@ bookSchema.index({ contentType: 1, language: 1, genres: 1 });
 bookSchema.index({ source: 1 });
 bookSchema.index({ gutenbergId: 1 }, { sparse: true });
 bookSchema.index({ archiveId: 1 }, { sparse: true });
+bookSchema.index({ mangadexId: 1 }, { sparse: true });
 
 // Performance indexes for homepage and sorting
 bookSchema.index({ isPublic: 1, createdAt: -1 });  // New releases

@@ -103,6 +103,10 @@ export const booksApi = {
     fetchContent: (bookId: string) => api.post(`/books/${bookId}/fetch-content`),
     getTrending: () => api.get('/books/trending'),
     getRecommended: () => api.get('/books/recommended'),
+    getMangadexChapters: (bookId: string, offset?: number) =>
+        api.get(`/books/${bookId}/mangadex-chapters`, { params: { offset } }),
+    getMangadexPages: (bookId: string, chapterId: string) =>
+        api.get(`/books/${bookId}/mangadex-pages/${chapterId}`),
 };
 
 // Comics API
@@ -167,6 +171,7 @@ export const adminApi = {
     getUsers: (params?: { page?: number; role?: string }) =>
         api.get('/admin/users', { params }),
     importGutenberg: (gutenbergId: string) => api.post(`/import/gutenberg/${gutenbergId}`),
+    importMangadex: (type: 'manga' | 'manhwa', limit: number) => api.post('/import/mangadex', { type, limit }),
 };
 
 // Reviews API
