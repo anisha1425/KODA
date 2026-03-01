@@ -548,12 +548,12 @@ router.get('/:id/mangadex-chapters', async (req: Request, res: Response) => {
         }
 
         const axios = (await import('axios')).default;
-        const lang = book.language === 'ko' ? 'ko' : book.language === 'ja' ? 'en' : 'en';
 
-        // Fetch chapters from MangaDex, sorted by chapter number
+        // Most MangaDex chapters are fan-translated to English
+        // Fetch chapters sorted by chapter number
         const response = await axios.get(`https://api.mangadex.org/manga/${book.mangadexId}/feed`, {
             params: {
-                'translatedLanguage[]': lang,
+                'translatedLanguage[]': 'en',
                 'order[chapter]': 'asc',
                 'limit': 100,
                 'offset': Number(req.query.offset) || 0,
